@@ -1,3 +1,5 @@
+#Pinecone API Key
+
 api_key = "52142f3b-4ea1-4692-b5dc-8d90dc0df87f"
 from langchain_community.retrievers import PineconeHybridSearchRetriever
 import os
