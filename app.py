@@ -29,3 +29,22 @@ load_dotenv()
 os.environ['OPENAI_API_KEY']=os.getenv("OPENAI_API_KEY")
 from langchain_openai import OpenAIEmbeddings
 embeddings = OpenAIEmbeddings()
+from pinecone_text.sparse import BM25Encoder
+# Initialize BM25 and fit the corpus.
+bm25_encoder = BM25Encoder().default()
+bm25_encoder
+corpus = ["In 2023, I visited Paris",
+          "In 2022, I visited New York",
+          "In 2021, I visited Japan"]
+bm25_encoder.fit(corpus)
+
+retriever = PineconeHybridSearchRetriever(
+    embeddings=embeddings, sparse_encoder=bm25_encoder, index=index
+)
+retriever.add_texts(corpus)
+
+
+# result = retriever.invoke("Which country did I visited recently?")
+# print(result)
+result = retriever.invoke("In the year 2023 which country did I visited?")
+print(result)
