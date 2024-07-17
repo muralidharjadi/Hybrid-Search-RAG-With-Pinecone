@@ -1,3 +1,6 @@
 pinecone-client
 pinecone-text
 pinecone-notebooks
+langchain-community
+python-dotenv
+langchain_openai
